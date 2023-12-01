@@ -1,0 +1,10 @@
+.vscode-test/
+out/
+dist/
+build/
+fable_modules/
+node_modules/
+.fable/
+obj/
+bin/
+*.fs.js
