@@ -22,9 +22,6 @@ type SendValue<'T> =
     | Sent of 'T
     | SendFailed of 'T * ErrorInfo
 
-let debug label value =
-    printfn $"%s{label} %A{value}"
-    value
 
 module RestApi =
 
