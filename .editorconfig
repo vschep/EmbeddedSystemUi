@@ -1,34 +1,108 @@
-root = true
-
 [*]
-indent_style = space
 charset = utf-8
-end_of_line=lf
+end_of_line = lf
 trim_trailing_whitespace = true
-insert_final_newline = true
-max_line_length=80
-
-[*.{js,jsx,mdx}]
+insert_final_newline = false
+indent_style = space
 indent_size = 2
 
-[*.fs]
+[{*.har,*.jsb2,*.jsb3,*.json,.babelrc,.eslintrc,.stylelintrc,bowerrc,jest.config}]
+indent_style = space
 indent_size = 4
-fsharp_space_before_colon=true
-fsharp_indent_on_try_with=true
-fsharp_max_if_then_else_short_width=10
-fsharp_max_record_width=28
-fsharp_max_dot_get_expression_width=70
-fsharp_max_value_binding_width=20
-fsharp_max_function_binding_width=25
-fsharp_keep_if_then_in_same_line=true
-fsharp_max_elmish_width=2
-fsharp_single_argument_web_mode=true
-fsharp_multi_line_lambda_closing_newline=true
-fsharp_blank_lines_around_nested_multiline_expressions=false
 
-[*.md]
-max_line_length = 0
-trim_trailing_whitespace = false
+[{*.htm,*.html,*.sht,*.shtm,*.shtml}]
+indent_style = space
+indent_size = 4
 
-[COMMIT_EDITMSG]
-max_line_length = 0
+[{*.yaml,*.yml}]
+indent_style = space
+indent_size = 2
+
+[{*.fs,*.fsi,*.ml,*.mli}]
+indent_style = space
+indent_size = 4
+max_line_length = 120
+# end_of_line=crlf
+insert_final_newline = true
+fsharp_space_before_parameter = true
+fsharp_space_before_lowercase_invocation = true
+fsharp_space_before_uppercase_invocation = false
+fsharp_space_before_class_constructor = false
+fsharp_space_before_member = false
+fsharp_space_before_colon = false
+fsharp_space_after_comma = true
+fsharp_space_before_semicolon = false
+fsharp_space_after_semicolon = true
+fsharp_space_around_delimiter = true
+fsharp_max_if_then_short_width = 0
+fsharp_max_if_then_else_short_width = 40
+fsharp_max_infix_operator_expression = 50
+fsharp_max_record_width = 40
+fsharp_max_record_number_of_items = 3
+fsharp_record_multiline_formatter = number_of_items
+fsharp_max_array_or_list_width = 40
+fsharp_max_array_or_list_number_of_items = 3
+fsharp_array_or_list_multiline_formatter = number_of_items
+fsharp_max_value_binding_width = 80
+fsharp_max_function_binding_width = 40
+fsharp_max_dot_get_expression_width = 80
+fsharp_newline_between_type_definition_and_members = false
+fsharp_align_function_signature_to_indentation = false
+fsharp_alternative_long_member_definitions = false
+fsharp_multi_line_lambda_closing_newline = false
+fsharp_experimental_keep_indent_in_branch = false
+fsharp_blank_lines_around_nested_multiline_expressions = true
+fsharp_bar_before_discriminated_union_declaration = false
+fsharp_multiline_bracket_style = experimental_stroustrup
+fsharp_keep_max_number_of_blank_lines = 100
+fsharp_strict_mode = false
+
+[{*.markdown,*.md}]
+indent_style = space
+indent_size = 4
+
+[*.css]
+indent_style = space
+indent_size = 4
+
+[*.{appxmanifest,asax,ascx,aspx,axaml,build,cg,cginc,compute,cs,cshtml,dtd,fs,fsi,fsscript,fsx,hlsl,hlsli,hlslinc,master,ml,mli,nuspec,paml,razor,resw,resx,skin,usf,ush,vb,xaml,xamlx,xoml,xsd}]
+indent_style = space
+indent_size = 4
+tab_width = 4
+
+[*.fs]
+
+# Microsoft .NET properties
+csharp_new_line_before_members_in_object_initializers = false
+csharp_preferred_modifier_order = public, private, protected, internal, new, static, abstract, virtual, sealed, readonly, override, extern, unsafe, volatile, async : suggestion
+csharp_space_after_cast = true
+csharp_style_var_elsewhere = true : suggestion
+csharp_style_var_for_built_in_types = true : suggestion
+csharp_style_var_when_type_is_apparent = true : suggestion
+dotnet_style_parentheses_in_arithmetic_binary_operators = never_if_unnecessary : none
+dotnet_style_parentheses_in_other_binary_operators = never_if_unnecessary : none
+dotnet_style_parentheses_in_relational_binary_operators = never_if_unnecessary : none
+dotnet_style_predefined_type_for_locals_parameters_members = true : suggestion
+dotnet_style_predefined_type_for_member_access = true : suggestion
+dotnet_style_qualification_for_event = false : suggestion
+dotnet_style_qualification_for_field = false : suggestion
+dotnet_style_qualification_for_method = false : suggestion
+dotnet_style_qualification_for_property = false : suggestion
+dotnet_style_require_accessibility_modifiers = for_non_interface_members : suggestion
+
+# ReSharper inspection severities
+resharper_arrange_redundant_parentheses_highlighting = hint
+resharper_arrange_this_qualifier_highlighting = hint
+resharper_arrange_type_member_modifiers_highlighting = hint
+resharper_arrange_type_modifiers_highlighting = hint
+resharper_built_in_type_reference_style_for_member_access_highlighting = hint
+resharper_built_in_type_reference_style_highlighting = hint
+resharper_identifier_typo_highlighting = none
+resharper_redundant_base_qualifier_highlighting = warning
+resharper_string_literal_typo_highlighting = none
+resharper_suggest_var_or_type_built_in_types_highlighting = hint
+resharper_suggest_var_or_type_elsewhere_highlighting = hint
+resharper_suggest_var_or_type_simple_types_highlighting = hint
+resharper_web_config_module_not_resolved_highlighting = warning
+resharper_web_config_type_not_resolved_highlighting = warning
+resharper_web_config_wrong_module_highlighting = warning
