@@ -52,15 +52,13 @@ type ChargingPermissionComponent =
 
     [<ReactComponent>]
     static member RadioInput
-        (props:
-            {|
-                RadioInputValue: ChargingPermission
-                ReceiveChargingPermission: ReceiveValue<ChargingPermission>
-                SendChargingPermission: SendValue<ChargingPermission>
-                OnChange: ChargingPermission -> unit
-            |})
-        =
-        let inputValueStr = $"%A{props.RadioInputValue}"
+        (
+            radioInputValue: ChargingPermission,
+            receiveChargingPermission: ReceiveValue<ChargingPermission>,
+            sendChargingPermission: SendValue<ChargingPermission>,
+            onChange: ChargingPermission -> unit
+        ) =
+        let inputValueStr = $"%A{radioInputValue}"
 
         Html.div [
             prop.classes [ "flex"; "gap-2" ]
@@ -71,15 +69,14 @@ type ChargingPermissionComponent =
                     prop.value inputValueStr
 
                     prop.isChecked (
-                        match props.SendChargingPermission, props.ReceiveChargingPermission with
-                        | (Initial permission | Sent permission), _ when permission = props.RadioInputValue -> true
-                        | (Sending _ | SendFailed _), Available permission when permission = props.RadioInputValue ->
-                            true
+                        match sendChargingPermission, receiveChargingPermission with
+                        | (Initial permission | Sent permission), _ when permission = radioInputValue -> true
+                        | (Sending _ | SendFailed _), Available permission when permission = radioInputValue -> true
                         | _ -> false
                     )
 
                     prop.disabled (
-                        match props.SendChargingPermission with
+                        match sendChargingPermission with
                         | Initial _
                         | Sent _
                         | SendFailed _ -> false
@@ -89,9 +86,9 @@ type ChargingPermissionComponent =
 
                     prop.onChange (fun (selectedValue: string) ->
                         if selectedValue = $"%A{Allow}" then
-                            props.OnChange Allow
+                            onChange Allow
                         elif selectedValue = $"%A{Disallow}" then
-                            props.OnChange Disallow
+                            onChange Disallow
                         else
                             ())
                 ]
@@ -118,26 +115,24 @@ type ChargingPermissionComponent =
         Html.div [
             prop.children [
                 Html.div [ prop.classes [ "text-xl"; "my-4" ]; prop.text "Charging Permission" ]
-                ChargingPermissionComponent.RadioInput
-                    {|
-                        RadioInputValue = Allow
-                        ReceiveChargingPermission = receiveChargingPermission
-                        SendChargingPermission = sendChargingPermission
-                        OnChange =
-                            (fun value ->
-                                setSendChargingPermission (Sending value)
-                                RestApi.putChargingPermission value setSendChargingPermission)
-                    |}
-                ChargingPermissionComponent.RadioInput
-                    {|
-                        RadioInputValue = Disallow
-                        ReceiveChargingPermission = receiveChargingPermission
-                        SendChargingPermission = sendChargingPermission
-                        OnChange =
-                            (fun value ->
-                                setSendChargingPermission (Sending value)
-                                RestApi.putChargingPermission value setSendChargingPermission)
-                    |}
+                ChargingPermissionComponent.RadioInput(
+                    radioInputValue = Allow,
+                    receiveChargingPermission = receiveChargingPermission,
+                    sendChargingPermission = sendChargingPermission,
+                    onChange =
+                        (fun value ->
+                            setSendChargingPermission (Sending value)
+                            RestApi.putChargingPermission value setSendChargingPermission)
+                )
+                ChargingPermissionComponent.RadioInput(
+                    radioInputValue = Disallow,
+                    receiveChargingPermission = receiveChargingPermission,
+                    sendChargingPermission = sendChargingPermission,
+                    onChange =
+                        (fun value ->
+                            setSendChargingPermission (Sending value)
+                            RestApi.putChargingPermission value setSendChargingPermission)
+                )
                 match sendChargingPermission with
                 | SendFailed(_, errorInfo) -> Html.div [ prop.text $"Error: %A{errorInfo}" ]
                 | _ -> ()
